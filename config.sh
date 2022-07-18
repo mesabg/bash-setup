@@ -105,7 +105,7 @@ rm -rf ./aws/ ./awscliv2.zip
 
 # Installing ECS-CLI
 sudo curl -Lo /usr/local/bin/ecs-cli https://s3.amazonaws.com/amazon-ecs-cli/ecs-cli-linux-amd64-latest
-chmod +x /usr/local/bin/ecs-cli
+sudo chmod +x /usr/local/bin/ecs-cli
 
 # Installing Heroku
 curl https://cli-assets.heroku.com/install.sh | sh
@@ -118,8 +118,8 @@ curl -LO "https://dl.k8s.io/release/v$KUBECTL_VERSION/bin/linux/amd64/kubectl"
 curl -LO "https://dl.k8s.io/v$KUBECTL_VERSION/bin/linux/amd64/kubectl.sha256"
 echo "$(cat kubectl.sha256) kubectl" | sha256sum --check
 rm -rf kubectl.sha256
-chmod +x kubectl
-mv ./kubectl /usr/local/bin/kubectl
+sudo chmod +x kubectl
+sudo mv ./kubectl /usr/local/bin/kubectl
 
 # Installing AWS-Vault
 sudo curl -L -o /usr/local/bin/aws-vault https://github.com/99designs/aws-vault/releases/download/v$AWSVAULT_VERSION/aws-vault-linux-amd64
