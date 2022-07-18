@@ -68,7 +68,7 @@ EOT
 
 # Installing Python
 curl https://pyenv.run | bash
-rm -rf /root/.pyenv
+rm -rf $HOME/.pyenv
 PYENV_CONFIG="$HOME/.pyenv_config"
 rm -rf $PYENV_CONFIG && touch $PYENV_CONFIG
 cat <<EOT >> $PYENV_CONFIG
