@@ -104,7 +104,7 @@ sudo ./aws/install
 rm -rf ./aws/ ./awscliv2.zip
 
 # Installing ECS-CLI
-curl -o /usr/local/bin/ecs-cli https://s3.amazonaws.com/amazon-ecs-cli/ecs-cli-linux-amd64-latest
+sudo curl -Lo /usr/local/bin/ecs-cli https://s3.amazonaws.com/amazon-ecs-cli/ecs-cli-linux-amd64-latest
 chmod +x /usr/local/bin/ecs-cli
 
 # Installing Heroku
