@@ -169,9 +169,15 @@ EOF
 
 # Prompt all needed to the bashrc
 cat <<EOT >> $HOME/.bashrc
+
+export DIRENV_CONFIG="\$HOME/.direnv_config"
+export SSH_CONFIG="\$HOME/.ssh_config"
+export PYENV_CONFIG="\$HOME/.pyenv_config"
+export NVM_CONFIG="\$HOME/.nvm_config"
 # Stateless configurations
 . \$DIRENV_CONFIG
 . \$SSH_CONFIG
 . \$PYENV_CONFIG
 . \$NVM_CONFIG
 EOT
+
