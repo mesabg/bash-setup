@@ -11,6 +11,7 @@ TERRAGRUNT_VERSION=0.38.4
 
 # Oh My Bash Configuration
 sed -i 's/OSH_THEME="font"/OSH_THEME="90210"/g' $HOME/.bashrc
+. $HOME/.bashrc
 
 # Needed base files creation
 mkdir -p $HOME/.local/bin
@@ -37,6 +38,21 @@ cat <<EOT >> $SSH_CONFIG
 SSH_ENV="\$HOME/.ssh/env"
 rm -rf \$SSH_ENV
 
+function load_git_profiles {
+  slug=\$1
+  name="\${1^}"
+  if [ -n "\$(ls -A \$HOME/.ssh/\$slug/ 2>/dev/null)" ]
+  then
+    echo "Loading SSH \$name profiles"
+    for FILE in \$HOME/.ssh/\$slug/*;
+    do
+      if [[ \$FILE != *.pub ]]; then ssh-add \$FILE; fi
+    done;
+  else
+    echo "No SSH \$name profiles found, skipping..."
+  fi
+}
+
 function run_ssh_env {
   . "\${SSH_ENV}" > /dev/null
 }
@@ -49,9 +65,9 @@ function start_ssh_agent {
 
   run_ssh_env;
 
-  for FILE in \$HOME/.ssh/github/*; do ssh-add \$FILE; done;
-  for FILE in \$HOME/.ssh/gitlab/*; do ssh-add \$FILE; done;
-  for FILE in \$HOME/.ssh/bitbucket/*; do ssh-add \$FILE; done;
+  load_git_profiles "github"
+  load_git_profiles "gitlab"
+  load_git_profiles "bitbucket"
 }
 
 if [ -f "\${SSH_ENV}" ]; then
