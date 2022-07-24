@@ -67,8 +67,8 @@ EOT
 . $SSH_CONFIG
 
 # Installing Python
-curl https://pyenv.run | bash
 rm -rf $HOME/.pyenv
+curl https://pyenv.run | bash
 PYENV_CONFIG="$HOME/.pyenv_config"
 rm -rf $PYENV_CONFIG && touch $PYENV_CONFIG
 cat <<EOT >> $PYENV_CONFIG
