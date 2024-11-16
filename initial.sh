@@ -27,7 +27,9 @@ sudo apt-get install -y \
   make \
   vim \
   direnv \
-  unzip
+  unzip \
+  libedit-dev \
+  tk-dev
 
 # Installing Oh My Bash
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/ohmybash/oh-my-bash/master/tools/install.sh)"
