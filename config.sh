@@ -90,24 +90,16 @@ rm -rf $PYENV_CONFIG && touch $PYENV_CONFIG
 cat <<EOT >> $PYENV_CONFIG
 # Pyenv configuration
 export PYENV_ROOT="\$HOME/.pyenv"
-command -v pyenv >/dev/null || export PATH="\$PYENV_ROOT/bin:\$PATH"
+[[ -d \$PYENV_ROOT/bin ]] && export PATH="\$PYENV_ROOT/bin:\$PATH"
 eval "\$(pyenv init -)"
+
+# Pyenv virtualenv configuration
+eval "$(pyenv virtualenv-init -)"
 
 EOT
 . $PYENV_CONFIG
 pyenv install $PYTHON_VERSION --force --verbose
 pyenv global $PYTHON_VERSION
-
-# Pyenv Virtualenv
-git clone https://github.com/pyenv/pyenv-virtualenv.git $(pyenv root)/plugins/pyenv-virtualenv
-PYVENV_CONFIG="$HOME/.pyvenv_config"
-rm -rf $PYVENV_CONFIG && touch $PYVENV_CONFIG
-cat <<EOT >> $PYVENV_CONFIG
-# Pyenv virtualenv configuration
-eval "\$(pyenv virtualenv-init -)"
-
-EOT
-. $PYVENV_CONFIG
 
 # Installing NVM
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v$NVM_VERSION/install.sh | bash
@@ -244,12 +236,10 @@ cat <<EOT >> $HOME/.bashrc
 export DIRENV_CONFIG="\$HOME/.direnv_config"
 export SSH_CONFIG="\$HOME/.ssh_config"
 export PYENV_CONFIG="\$HOME/.pyenv_config"
-export PYVENV_CONFIG="\$HOME/.pyvenv_config"
 export NVM_CONFIG="\$HOME/.nvm_config"
 # Stateless configurations
 . \$DIRENV_CONFIG
 . \$SSH_CONFIG
 . \$PYENV_CONFIG
-. \$PYVENV_CONFIG
 . \$NVM_CONFIG
 EOT
