@@ -156,6 +156,7 @@ alias cd='cdnvm'
 cd "\$PWD"
 
 EOT
+cat $NVM_CONFIG
 echo $NVM_CONFIG
 . $NVM_CONFIG
 nvm install $NODE_VERSION
